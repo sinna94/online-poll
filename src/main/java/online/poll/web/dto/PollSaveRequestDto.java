@@ -1,7 +1,6 @@
 package online.poll.web.dto;
 
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 import online.poll.domain.poll.Poll;
 import online.poll.domain.question.Question;
 

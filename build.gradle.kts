@@ -20,6 +20,7 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webflux")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
 }

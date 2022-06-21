@@ -2,11 +2,11 @@ package online.poll.web;
 
 import lombok.RequiredArgsConstructor;
 import online.poll.sevice.PollService;
+import online.poll.web.dto.PollResponseDto;
 import online.poll.web.dto.PollSaveRequestDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,5 +18,17 @@ public class PollController {
     @PostMapping
     public Long createPoll(@RequestBody PollSaveRequestDto requestDto) {
         return pollService.createPoll(requestDto);
+    }
+
+    @GetMapping
+    public Page<PollResponseDto> getPolls(
+        @RequestParam Pageable pageable
+    ) {
+        return pollService.getPolls(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public PollResponseDto getPoll(@PathVariable Long id) {
+        return pollService.getPoll(id);
     }
 }

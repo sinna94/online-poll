@@ -29,7 +29,7 @@ public class Poll extends BaseTimeEntity {
     private boolean completed;
 
     @OneToMany(mappedBy = "poll")
-    private List<Question> questionList = new ArrayList<>();
+    private final List<Question> questionList = new ArrayList<>();
 
     @Builder
     public Poll(String title, LocalDateTime timeLimit) {
@@ -41,7 +41,7 @@ public class Poll extends BaseTimeEntity {
     public Poll() {
     }
 
-    public void addQuestions(List<Question> questions){
+    public void addQuestions(List<Question> questions) {
         questionList.addAll(questions);
     }
 }
