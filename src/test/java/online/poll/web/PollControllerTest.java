@@ -1,6 +1,7 @@
 package online.poll.web;
 
 import lombok.RequiredArgsConstructor;
+import online.poll.domain.poll.Poll;
 import online.poll.domain.poll.PollRepository;
 import online.poll.domain.question.QuestionRepository;
 import online.poll.sevice.PollService;
@@ -15,13 +16,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -74,5 +81,26 @@ class PollControllerTest {
             .uri("/api/v1/poll/1")
             .exchange()
             .expectStatus().isNoContent();
+    }
+
+    @Test
+    void getPolls() {
+        List<PollResponseDto> pollList = IntStream.rangeClosed(7, 10)
+            .mapToObj(num -> Poll.builder().title("t" + num).build())
+            .map(PollResponseDto::createPollResponseDto)
+            .toList();
+        PageRequest pageRequest = PageRequest.of(1, 6);
+
+        Page<PollResponseDto> page = new PageImpl<>(pollList, pageRequest, 10);
+        when(mockPollService.getPolls(any()))
+            .thenReturn(page);
+
+        webTestClient.get()
+            .uri(uriBuilder -> uriBuilder.path("/api/v1/poll")
+                .queryParam("page", "1")
+                .queryParam("size", "6")
+                .build())
+            .exchange()
+            .expectStatus().isOk();
     }
 }

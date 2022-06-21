@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/poll")
+@RequestMapping("api/v1/poll")
 public class PollController {
 
     private final PollService pollService;
@@ -21,13 +21,11 @@ public class PollController {
     }
 
     @GetMapping
-    public Page<PollResponseDto> getPolls(
-        @RequestParam Pageable pageable
-    ) {
+    public Page<PollResponseDto> getPolls(Pageable pageable) {
         return pollService.getPolls(pageable);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public PollResponseDto getPoll(@PathVariable Long id) {
         return pollService.getPoll(id);
     }
