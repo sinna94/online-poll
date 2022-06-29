@@ -44,4 +44,8 @@ public class Poll extends BaseTimeEntity {
     public void addQuestions(List<Question> questions) {
         questionList.addAll(questions);
     }
+
+    public void setCompleted(){
+        this.completed = true;
+    }
 }

@@ -60,6 +60,9 @@ class PollServiceTest {
             .hasSize(3)
             .extracting("title")
             .contains("Q1", "Q2", "Q3");
+        assertThat(questionList)
+            .extracting("id")
+            .doesNotContainNull();
     }
 
     @DisplayName("투표 전체 페이징 조회")
