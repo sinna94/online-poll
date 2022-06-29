@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record PollResponseDto(
+    Long pollId,
     String title,
     LocalDateTime timeLimit,
     boolean completed,
@@ -15,6 +16,7 @@ public record PollResponseDto(
 ) {
     public static PollResponseDto createPollResponseDto(Poll poll) {
         return new PollResponseDto(
+            poll.getId(),
             poll.getTitle(),
             poll.getTimeLimit(),
             poll.isCompleted(),

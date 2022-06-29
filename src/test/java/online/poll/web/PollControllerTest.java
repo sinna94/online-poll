@@ -2,35 +2,41 @@ package online.poll.web;
 
 import lombok.RequiredArgsConstructor;
 import online.poll.domain.poll.Poll;
-import online.poll.domain.poll.PollRepository;
-import online.poll.domain.question.QuestionRepository;
 import online.poll.sevice.PollService;
 import online.poll.web.dto.PollResponseDto;
 import online.poll.web.dto.PollSaveRequestDto;
 import online.poll.web.exception.PollNotExistException;
-import org.junit.jupiter.api.BeforeEach;
+import online.poll.websocket.message.RequestMessage;
+import online.poll.websocket.message.ResponseMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.simp.stomp.StompFrameHandler;
+import org.springframework.messaging.simp.stomp.StompHeaders;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
+import org.springframework.web.socket.sockjs.client.SockJsClient;
+import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
+import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -59,7 +65,7 @@ class PollControllerTest {
 
     @Test
     void getPoll() {
-        PollResponseDto responseDto = new PollResponseDto("title", null, false, List.of());
+        PollResponseDto responseDto = new PollResponseDto(1L, "title", null, false, List.of());
         when(mockPollService.getPoll(anyLong()))
             .thenReturn(responseDto);
 

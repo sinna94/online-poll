@@ -33,4 +33,12 @@ public class Question extends BaseTimeEntity {
 
     public Question() {
     }
+
+    public void increaseVoteCount() {
+        voteCount++;
+    }
+
+    public void decreaseVoteCount() {
+        voteCount--;
+    }
 }

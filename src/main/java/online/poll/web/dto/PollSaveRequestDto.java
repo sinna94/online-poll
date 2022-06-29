@@ -14,9 +14,16 @@ public record PollSaveRequestDto(
     List<String> questionTitles
 ) {
     public Poll toPollEntity() {
+
+        LocalDateTime timeLimit = timeLimit();
+
+        if(timeLimit == null){
+            timeLimit = LocalDateTime.now().plusHours(1);
+        }
+
         return Poll.builder()
             .title(title())
-            .timeLimit(timeLimit())
+            .timeLimit(timeLimit)
             .build();
     }
 
