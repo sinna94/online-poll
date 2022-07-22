@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+#  zookeeper:
+#    image: zookeeper
+#    restart: always
+#    ports:
+#      - "2181:2181"
+  kafka:
+    image: ripplemotion/kafka
+    restart: always
+    ports:
+      - "9092:9092"
+      - "2181:2181"
+    environment:
+      ADVERTISED_HOST: 127.0.0.1
+      ADVERTISED_PORT: 9092
+      CONSUMER_THREADS: 1
+      ZK_CONNECT: kafka7zookeeper:2181/root/zookeeper
+      LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      OFFSETS_TOPIC_REPLICATION_FACTOR: 1
