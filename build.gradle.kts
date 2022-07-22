@@ -4,11 +4,12 @@ plugins {
     id("java")
 }
 
-group ="online.poll"
+group = "online.poll"
 version = "0.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven(url = "https://repo.spring.io/libs-milestone")
 }
 
 dependencies {
@@ -24,6 +25,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.apache.kafka:kafka-clients:3.2.0")
 }
 
 tasks.named<Test>("test") {
