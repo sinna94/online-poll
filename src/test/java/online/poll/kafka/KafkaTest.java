@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RequiredArgsConstructor
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://127.0.0.1:9092", "port=9092"}, topics = {"poll"})
+@EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://127.0.0.1:9092", "port=9092"})
 class KafkaTest {
     static {
         System.setProperty(EmbeddedKafkaBroker.BROKER_LIST_PROPERTY, "spring.kafka.bootstrap-servers");

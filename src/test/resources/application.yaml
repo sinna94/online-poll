@@ -30,6 +30,8 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       auto-offset-reset: earliest
       bootstrap-servers: "${spring.embedded.kafka.brokers:localhost:9092}"
+    template:
+      default-topic: "poll"
 
   main:
     allow-bean-definition-overriding: true
