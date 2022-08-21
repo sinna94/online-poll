@@ -18,6 +18,13 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew test
+      - name: generate jacoco report
+        run: ./gradlew jacocoTestReport
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./build/reports/jacoco/test/jacocoTestReport.xml
+          fail_ci_if_error: true
   codeball_job:
     runs-on: ubuntu-latest
     name: Codeball
