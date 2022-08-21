@@ -1,4 +1,4 @@
-package online.poll.web.dto;
+package online.poll.kafka;
 
 import online.poll.websocket.message.ResponseMessage;
 

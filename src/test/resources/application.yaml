@@ -13,13 +13,14 @@ spring:
     hibernate:
       ddl-auto: create
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: "${spring.embedded.kafka.brokers:localhost:9092}"
     producer:
       properties:
         spring:
           json:
             trusted:
               packages: "*"
+      bootstrap-servers: "${spring.embedded.kafka.brokers:localhost:9092}"
     consumer:
       properties:
         spring:
@@ -27,6 +28,11 @@ spring:
             trusted:
               packages: "*"
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      bootstrap-servers: "${spring.embedded.kafka.brokers:localhost:9092}"
+
+  main:
+    allow-bean-definition-overriding: true
 decorator:
   datasource:
     p6spy:

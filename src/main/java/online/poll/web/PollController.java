@@ -2,7 +2,7 @@ package online.poll.web;
 
 import lombok.RequiredArgsConstructor;
 import online.poll.sevice.PollService;
-import online.poll.web.dto.KafkaMessage;
+import online.poll.kafka.KafkaMessage;
 import online.poll.web.dto.PollResponseDto;
 import online.poll.web.dto.PollSaveRequestDto;
 import online.poll.websocket.message.RequestMessage;

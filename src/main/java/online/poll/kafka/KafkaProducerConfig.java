@@ -1,6 +1,5 @@
-package online.poll.config;
+package online.poll.kafka;
 
-import online.poll.web.dto.KafkaMessage;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

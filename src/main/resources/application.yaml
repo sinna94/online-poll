@@ -22,6 +22,7 @@ spring:
             trusted:
               packages: '*'
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: latest
 ---
 server:
   port: 8081
