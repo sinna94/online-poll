@@ -2,10 +2,15 @@ plugins {
     id("org.springframework.boot") version "2.6.6"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("java")
+    id("jacoco")
 }
 
 group ="online.poll"
 version = "0.0.1-SNAPSHOT"
+
+jacoco {
+    toolVersion = "0.8.8"
+}
 
 repositories {
     mavenCentral()
@@ -28,4 +33,13 @@ dependencies {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks {
+    jacocoTestReport {
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+        }
+    }
 }
