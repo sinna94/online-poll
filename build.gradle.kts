@@ -31,7 +31,12 @@ dependencies {
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.springframework.kafka:spring-kafka")
-    implementation("org.apache.kafka:kafka-clients:3.2.0")
+//    implementation("org.apache.kafka:kafka-clients:3.2.0")
+//    testImplementation("org.apache.kafka:kafka-clients:3.2.0")
+//    testImplementation("org.scala-lang:scala-library:2.13.8")
+//    testImplementation("org.apache.kafka:kafka_2.12:3.0.0")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
+//    testImplementation("org.testcontainers:kafka:1.17.2")
 }
 
 tasks.named<Test>("test") {

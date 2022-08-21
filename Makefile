@@ -1,4 +1,4 @@
 start-kafka:
-	kafka-server-start /usr/local/etc/kafka/server.properties
+	docker-compose up -d
 stop-kafka:
-	kafka-server-stop
+	docker-compose down

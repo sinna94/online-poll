@@ -1,6 +1,5 @@
-package online.poll.config;
+package online.poll.kafka;
 
-import online.poll.web.dto.KafkaMessage;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +43,6 @@ public class KafkaConsumerConfig {
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer,
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
             ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class,
-            ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest",
             "group.id", "poll"
         );
     }
